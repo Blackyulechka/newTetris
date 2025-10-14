@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tetris</string>
+    <string name="tetris">ТЕТРИС</string>
+    <string name="buttonPlay">ИГРАТЬ</string>
+    <string name="buttonClickLeft">⇦</string>
+    <string name="buttonClickRight">⇨</string>
+    <string name="buttonClickDown">⇩</string>
+</resources>

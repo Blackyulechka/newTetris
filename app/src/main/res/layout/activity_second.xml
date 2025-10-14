@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.secondActivity">
+
+    <ImageButton
+        android:id="@+id/buttonLeft"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_arrow_left"
+        android:text="@string/buttonClickLeft"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="575dp" />
+
+    <ImageButton
+        android:id="@+id/buttonRight"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_arrow_right"
+        android:text="@string/buttonClickRight"
+        tools:layout_editor_absoluteX="119dp"
+        tools:layout_editor_absoluteY="575dp" />
+
+    <ImageButton
+        android:id="@+id/buttonDown"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_arrow_down"
+        android:text="@string/buttonClickDown"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="647dp" />
+
+    <ImageButton
+        android:id="@+id/buttonRotate"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_arrow_circle"
+        tools:layout_editor_absoluteX="273dp"
+        tools:layout_editor_absoluteY="608dp" />
+
+    <FrameLayout
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="107dp">
+
+    </FrameLayout>
+    //тут что то должно быть
+</androidx.constraintlayout.widget.ConstraintLayout>
