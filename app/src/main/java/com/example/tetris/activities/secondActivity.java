@@ -46,9 +46,13 @@ public class secondActivity extends AppCompatActivity {
                 String cellId = "i_" + i + "_" + j;
                 int resId = getResources().getIdentifier(cellId, "id", getPackageName());
                 LinearLayout cell = findViewById(resId);
-                cell.setBackgroundColor(Color.TRANSPARENT);
+
+                if (cell != null) {
+                    cell.setBackgroundColor(Color.TRANSPARENT);
+                }
             }
         }
+
         int[][] grid = game.getGrid();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 6; j++) {
@@ -56,7 +60,10 @@ public class secondActivity extends AppCompatActivity {
                     String cellId = "i_" + i + "_" + j;
                     int resId = getResources().getIdentifier(cellId, "id", getPackageName());
                     LinearLayout cell = findViewById(resId);
-                    cell.setBackgroundColor(Color.BLACK);
+
+                    if (cell != null) {
+                        cell.setBackgroundColor(Color.BLACK);
+                    }
                 }
             }
         }

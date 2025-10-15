@@ -14,19 +14,28 @@
         android:background="@android:color/transparent"
         android:src="@drawable/ic_arrow_left"
         android:text="@string/buttonClickLeft"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="575dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonDown"
+        app:layout_constraintEnd_toStartOf="@+id/buttonRight"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gameGrid"
+        app:layout_constraintVertical_bias="0.883"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/buttonRight"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:layout_marginEnd="220dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_arrow_right"
         android:text="@string/buttonClickRight"
-        tools:layout_editor_absoluteX="119dp"
-        tools:layout_editor_absoluteY="575dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonDown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gameGrid"
+        app:layout_constraintVertical_bias="0.884"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
@@ -36,8 +45,12 @@
         android:background="@android:color/transparent"
         android:src="@drawable/ic_arrow_down"
         android:text="@string/buttonClickDown"
-        tools:layout_editor_absoluteX="76dp"
-        tools:layout_editor_absoluteY="647dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.981"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
@@ -46,8 +59,12 @@
         android:layout_height="72dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_arrow_circle"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="608dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.755"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.943"
         tools:ignore="MissingConstraints" />
 
     <GridLayout
