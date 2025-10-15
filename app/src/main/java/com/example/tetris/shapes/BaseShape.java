@@ -1,75 +1,55 @@
 package com.example.tetris.shapes;
 
 
-import com.example.tetris.ShapeInterface.ShapeInterface;
+import com.example.tetris.Interfaces.ShapeInterface;
 
 public abstract class BaseShape implements ShapeInterface {
-    protected int[][] shape;
-    protected int x, y;
-    protected int color;
+    protected int[][] coord;
+    protected int centerX, centerY;
+    //protected int color;
 
-    public BaseShape(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public BaseShape(int centerX, int centerY){
+        this.centerX = centerX;
+        this.centerY = centerY;
     }
-
     @Override
-    public int[][] getShape() {
-        return shape;
+    public int[][] getCoord(){
+        return coord;
     }
-
     @Override
-    public int getColor() {
-        return color;
+    public int getCenterX(){
+        return centerX;
     }
-
     @Override
-    public int getWidth() {
-        return shape[0].length;
+    public int getCenterY(){
+        return centerY;
     }
-
     @Override
-    public int getHeight() {
-        return shape.length;
+    public void setCenter(int x, int y){
+        this.centerX =x;
+        this.centerY = y;
     }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void moveLeft() {
-        x--;
-    }
-
-    public void moveRight() {
-        x++;
-    }
-
-    public void moveDown() {
-        y--;
-    }
+    @Override
     public void rotate() {
-        int[][] newShape = new int[shape[0].length][shape.length];
-
-        for (int i = 0; i < shape.length; i++) {
-            for (int j = 0; j < shape[i].length; j++) {
-                newShape[j][shape.length - 1 - i] = shape[i][j];
-            }
+        int[][] newCoords = new int[coord.length][2];
+        for (int i = 0; i < coord.length; i++) {
+            int x = coord[i][0];
+            int y = coord[i][1];
+            newCoords[i][0] = -y;
+            newCoords[i][1] = x;
         }
-
-        shape = newShape;
+        coord = newCoords;
+    }
+    @Override
+    public void rotateBack() {
+        int[][] newCoords = new int[coord.length][2];
+        for (int i = 0; i < coord.length; i++) {
+            int x = coord[i][0];
+            int y = coord[i][1];
+            newCoords[i][0] = y;
+            newCoords[i][1] = -x;
+        }
+        coord = newCoords;
     }
 
 }

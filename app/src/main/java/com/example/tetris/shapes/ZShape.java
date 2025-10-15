@@ -3,9 +3,8 @@ package com.example.tetris.shapes;
 import android.graphics.Color;
 
 public class ZShape extends BaseShape {
-    public ZShape(int x, int y) {
-        super(x,y);
-        this.shape = new int[][]{ {0,0,1},{1,1, 1}};
-        this.color = Color.rgb(0,255,255);
+    public ZShape(int centerX, int centerY) {
+        super(centerX, centerY);
+        this.coord = new int[][]{{0, 0}, {1, 0}, {1, 1}, {2, 1}};
     }
 }

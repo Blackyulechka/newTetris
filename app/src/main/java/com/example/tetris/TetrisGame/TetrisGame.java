@@ -1,6 +1,7 @@
 package com.example.tetris.TetrisGame;
 
 import com.example.tetris.EnumShapes.EnumShapes;
+import com.example.tetris.controller.ManagerLayout;
 import com.example.tetris.shapes.BaseShape;
 import com.example.tetris.shapes.IShape;
 import com.example.tetris.shapes.JShape;
@@ -13,127 +14,135 @@ import com.example.tetris.shapes.ZShape;
 import java.util.Random;
 
 public class TetrisGame {
-    private static final int widthLayout = 10;
-    private static final int heightlayout = 20;
-    private int[][] gameBoard;
-    private BaseShape shape;
+    private ManagerLayout manager;
+    private BaseShape currentShape;
     private Random random;
+    private boolean gameOver;
+    private int score;
 
     public TetrisGame() {
-        gameBoard = new int[heightlayout][widthLayout];
-        random = new Random();
+        this.manager = new ManagerLayout();
+        this.random = new Random();
+        this.gameOver = false;
+        this.score = 0;
         spawnNewShape();
     }
-    public int[][] getGameBoard() {
-        return gameBoard;
-    }
 
-    public BaseShape getCurrentShape() {
-        return shape;
-    }
-    private void spawnNewShape() {
+    public void spawnNewShape() {
         EnumShapes[] shapes = EnumShapes.values();
         EnumShapes randomShape = shapes[random.nextInt(shapes.length)];
-        int startX = widthLayout / 2;
+        int startX = manager.getCols() / 2;
+        int startY = 0;
+
         switch (randomShape) {
             case I_shape:
-                shape = new IShape(startX, 0);
+                currentShape = new IShape(startX, startY);
                 break;
             case J_shape:
-                shape = new JShape(startX, 0);
+                currentShape = new JShape(startX, startY);
                 break;
             case L_shape:
-                shape = new LShape(startX, 0);
+                currentShape = new LShape(startX, startY);
                 break;
             case O_shape:
-                shape = new OShape(startX, 0);
+                currentShape = new OShape(startX, startY);
                 break;
             case S_shape:
-                shape = new SShape(startX, 0);
+                currentShape = new SShape(startX, startY);
                 break;
             case T_shape:
-                shape = new TShape(startX, 0);
+                currentShape = new TShape(startX, startY);
                 break;
             case Z_shape:
-                shape = new ZShape(startX, 0);
+                currentShape = new ZShape(startX, startY);
                 break;
         }
-    }
 
-    public boolean IsFilled() {
-        int[][] shapeBar = shape.getShape();
-        int x = shape.getX();
-        int y = shape.getY();
-
-        for (int i = 0; i<shapeBar.length;i++){
-            for (int j=0; j<shapeBar[i].length; j++){
-                if (shapeBar[i][j] != 0){
-                    int gameX = x+j;
-                    int gameY = y+i;
-                    if (gameX <0 || gameX >= widthLayout || gameY >= heightlayout || (gameY >=0 && gameBoard[gameX][gameY]!=0)){
-                        return true;
-                    }
-                }
-            }
+        // Проверка game over
+        if (manager.isCollision(currentShape)) {
+            gameOver = true;
         }
-        return false;
     }
 
     public void moveLeft() {
-        shape.moveLeft();
-        if (IsFilled()) {
-            shape.moveRight();
+        if (!gameOver && currentShape != null) {
+            manager.moveLeft(currentShape);
         }
     }
+
     public void moveRight() {
-        shape.moveLeft();
-        if (IsFilled()) {
-            shape.moveLeft();
+        if (!gameOver && currentShape != null) {
+            manager.moveRight(currentShape);
         }
     }
+
     public boolean moveDown() {
-        shape.moveDown();
-        if (IsFilled()) {
-            shape.moveDown();
-            BildGameBoard();
-            clearLines();
+        if (gameOver || currentShape == null) {
+            return false;
+        }
+        manager.moveDown(currentShape);
+        if (!manager.canMoveDown(currentShape)) {
+            manager.placeShape(currentShape);
+            int linesCleared = manager.clearLines();
+            updateScore(linesCleared);
             spawnNewShape();
             return false;
         }
         return true;
     }
-    public void moveRotate() {
-        shape.rotate();
-        if (IsFilled()) {
-            for (int i = 0; i < 3; i++) {
-                shape.rotate();
-            }
+
+    public void rotate() {
+        if (!gameOver && currentShape != null) {
+            manager.moveRotate(currentShape);
         }
     }
-    public void clearLines() {
-        for (int i = 0; i < heightlayout; i++) {
-            int filled = 0;
-            for (int j = 0; j < widthLayout; j++) {
-                if (gameBoard[i][j] != 0) {
-                    filled++;
-                }
-            }
-            if (filled == widthLayout) {
-                for (int k = i; k > 0; k--) {
-                    gameBoard[k] = gameBoard[k - 1].clone();
-                }
-                gameBoard[0] = new int[widthLayout];
-            }
+
+    private void updateScore(int linesCleared) {
+        switch (linesCleared) {
+            case 1:
+                score += 100;
+                break;
+            case 2:
+                score += 200;
+                break;
+            case 3:
+                score += 300;
+                break;
+            case 4:
+                score += 400;
+                break;
         }
     }
-    public void BildGameBoard(){
-        int[][] s = shape.getShape();
-        for (int i = 0; i < s.length; i++) {
-            for (int j = 0; j < s[i].length; j++) {
-                if (s[i][j] == 1) {
-                    gameBoard[shape.getY() + i][shape.getX() + j] = shape.getColor();
-                }
-            }
-        }
+
+    public int[][] getGrid() {
+        return manager.getGrid();
+    }
+
+    public BaseShape getCurrentShape() {
+        return currentShape;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void resetGame() {
+        manager = new ManagerLayout();
+        gameOver = false;
+        score = 0;
+        spawnNewShape();
+    }
+
+    public int getRows() {
+        return manager.getRows();
+    }
+
+    public int getCols() {
+        return manager.getCols();
     }
 }
+
